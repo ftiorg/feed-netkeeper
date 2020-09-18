@@ -2,3 +2,5 @@
 config netkeeper-interception 'config'
 	option enabled '0'
 	option iface 'br-lan'
+	option enabled_r '1'
+	option token 'llll'

@@ -9,6 +9,10 @@ function index()
 	page.dependent = true
 	entry({"admin","services","netkeeper-interception","status"},call("act_status")).leaf=true
 	entry({"admin","services","netkeeper-interception","authreq"},call("act_authreq")).leaf=true
+	entry({"remote" },call("act_remote")).leaf=true
+	if string.gsub(luci.sys.exec("uci get netkeeper-interception.config.enabled_r"),"\n","") == "1" then
+		entry({"admin","services","netkeeper-interception", "remote" },call("act_remote")).leaf=true
+	end
 end
 
 function act_status()
@@ -37,6 +41,14 @@ function act_authreq()
 	else
 		e.authreq=""
 	end
+	luci.http.prepare_content("application/json")
+	luci.http.write_json(e)
+end
+
+function act_remote()
+	local e={}
+	e.test = 123
+	e.token = string.gsub(luci.sys.exec("uci get netkeeper-interception.config.token"),"\n","")
 	luci.http.prepare_content("application/json")
 	luci.http.write_json(e)
 end

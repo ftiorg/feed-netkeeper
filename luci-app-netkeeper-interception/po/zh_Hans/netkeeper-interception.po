@@ -4,6 +4,12 @@ msgstr "Content-Type: text/plain; charset=UTF-8"
 msgid "Netkeeper Interception"
 msgstr "闪讯拦截"
 
+msgid "Local Interception"
+msgstr "本地拦截"
+
+msgid "Remote Interception"
+msgstr "远程拦截"
+
 msgid "Netkeeper Account Interception Plugin"
 msgstr "闪讯账户拦截插件"
 
@@ -14,7 +20,19 @@ msgid "Specifies the Lan Interface that needs to be Listen by The PPPoE Server"
 msgstr "指定用于PPPoE服务器监听的LAN接口，用于拦截闪讯客户端账户"
 
 msgid "Last AuthReq"
-msgstr "Last AuthReq"
+msgstr "最后一次认证"
 
 msgid "Last PPPoE Server Auth Request (Live Update)"
 msgstr "PPPoE收到的最后一次账户认证请求（实时更新）"
+
+msgid "Login with Netkeeper Software on PC over lan"
+msgstr "使用局域网中的电脑Netkeeper客户端登陆"
+
+msgid "Login over HTTP request"
+msgstr "使用HTTP请求进行登录"
+
+msgid "HTTP token"
+msgstr "身份认证令牌"
+
+msgid "HTTP request token"
+msgstr "用于验证远程登录身份"
