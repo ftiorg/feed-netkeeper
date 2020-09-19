@@ -51,19 +51,6 @@ return network.registerProtocol('netkeeper', {
 		o.placeholder = _('auto');
 
 		o = s.taboption('general', form.ListValue, 'pppd_options', _('Netkeeper plugin'), _('Choice Netkeeper plugin'));
-		o.value('plugin chongqing0094_sxplugin.so', _('Netkeeper Chongqing 0094'));
-		o.value('plugin chongqing_sxplugin.so', _('Netkeeper Chongqing'));
-		o.value('plugin gansu_telecom_sxplugin.so', _('Netkeeper Gansu'));
-		o.value('plugin hainan_sxplugin.so', _('Netkeeper Hainan'));
-		o.value('plugin hebei_sxplugin.so', _('Netkeeper Hebei'));
-		o.value('plugin hubei_sxplugin.so', _('Netkeeper Hubei'));
-		o.value('plugin qinghai_sxplugin.so', _('Netkeeper Qinghai'));
-		o.value('plugin shandongmobile_4_9_sxplugin.so', _('Netkeeper Shandong Mobile 4.9'));
-		o.value('plugin shandongmobile_sxplugin.so', _('Netkeeper Shandong Mobile'));
-		o.value('plugin shanxi_yixun_sxplugin.so', _('Yixun Shanxi'));
-		o.value('plugin xinjiang_sxplugin.so', _('Netkeeper Xinjiang'));
-		o.value('plugin zhejiang_qiye_sxplugin.so', _('Netkeeper Enterprise Zhejiang'));
-		o.value('plugin zhejiang_xiaoyuan_sxplugin.so', _('Netkeeper School Zhejiang'));
 		o.value('plugin netkeeper-interception-c.so', _('Netkeeper Interception'));
 		o.rmempty = false;
 
