@@ -1,14 +1,24 @@
 <script type="text/javascript">//<![CDATA[
-XHR.poll(3, '<%=url([[admin]], [[services]], [[netkeeper-interception]], [[authreq]])%>', null,
-	function(x, data) {
-		var tb = document.getElementById('netkeeper-interception_authreq');
-		tb.innerHTML = data.authreq;
-	}
-);
-//]]>
+	XHR.poll(3, '<%=url([[admin]], [[services]], [[netkeeper-interception]], [[authreq]])%>', null,
+		function (x, data) {
+			var tb = document.getElementById('netkeeper-interception_authreq');
+			if (data.success) {
+				tb.innerHTML = "账号信息: " + data.account;
+			}else{
+				tb.innerHTML = "未检测到账号"
+			}
+		}
+	);
+	//]]>
 </script>
-<%+cbi/valueheader%>
-	<span id="netkeeper-interception_authreq" class="cbi-value" style="padding: .35rem 0rem .2rem" data-update="change">
-	<%-=pcdata(self:cfgvalue(section) or self.default)-%>
-	</span>
-<%+cbi/valuefooter%>
+<style>
+	.mar-10 {
+		margin-left: 50px;
+		margin-right: 10px;
+	}
+</style>
+<fieldset class="cbi-section">
+	<p id="netkeeper-interception_authreq" style="padding-top:0px!important;">
+		<em><%:Collecting data...%></em>
+	</p>
+</fieldset>

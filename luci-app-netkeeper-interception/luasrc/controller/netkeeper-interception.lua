@@ -9,9 +9,8 @@ function index()
 	page.dependent = true
 	entry({"admin","services","netkeeper-interception","status"},call("act_status")).leaf=true
 	entry({"admin","services","netkeeper-interception","authreq"},call("act_authreq")).leaf=true
-	entry({"remote" },call("act_remote")).leaf=true
 	if string.gsub(luci.sys.exec("uci get netkeeper-interception.config.enabled_r"),"\n","") == "1" then
-		entry({"admin","services","netkeeper-interception", "remote" },call("act_remote")).leaf=true
+		entry({"remote" },call("act_remote")).leaf=true
 	end
 end
 
@@ -36,10 +35,10 @@ function act_authreq()
 	local e={}
 	if nixio.fs.access("/var/Last_AuthReq") then
 		local r=nixio.fs.readfile("/var/Last_AuthReq")
-		r=string.tohex(r)
-		e.authreq=r
+		e.success = true
+		e.account = r
 	else
-		e.authreq=""
+		e.success = false
 	end
 	luci.http.prepare_content("application/json")
 	luci.http.write_json(e)
@@ -49,6 +48,7 @@ function act_remote()
 	local e={}
 	e.test = 123
 	e.token = string.gsub(luci.sys.exec("uci get netkeeper-interception.config.token"),"\n","")
+	e.post = luci.http.formvalue("post")
 	luci.http.prepare_content("application/json")
 	luci.http.write_json(e)
 end
