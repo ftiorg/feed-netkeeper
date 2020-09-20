@@ -5,7 +5,7 @@ function index()
 		return
 	end
 	local page
-	page = entry({"admin", "services", "netkeeper-interception"}, cbi("netkeeper-interception"), _("Netkeeper Interception"), 100)
+	page = entry({"admin", "services", "netkeeper-interception"}, cbi("netkeeper-interception"), "校园网登录", 100)
 	page.dependent = true
 	entry({"admin","services","netkeeper-interception","status"},call("act_status")).leaf=true
 	entry({"admin","services","netkeeper-interception","authreq"},call("act_authreq")).leaf=true

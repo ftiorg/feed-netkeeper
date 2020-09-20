@@ -2,7 +2,7 @@ local sys = require "luci.sys"
 
 m = Map("netkeeper-interception")
 m.title	= "校园网登录"
-m.description = translate("Netkeeper Account Interception Plugin")
+m.description = "本地和远程两种方法进行登录"
 
 m:section(SimpleSection).template = "netkeeper-interception/netkeeper-interception_authreq"
 
