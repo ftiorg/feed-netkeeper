@@ -10,6 +10,7 @@ function index()
 	entry({"admin","services","netkeeper-interception","status"},call("act_status")).leaf=true
 	entry({"admin","services","netkeeper-interception","authreq"},call("act_authreq")).leaf=true
 	entry({"admin","services","netkeeper-interception","apstatus"},call("act_apstatus")).leaf=true
+	entry({"admin","services","netkeeper-interception","vpnstatus"},call("act_vpnstatus")).leaf=true
 	if string.gsub(luci.sys.exec("uci get netkeeper-interception.config.enabled_r"),"\n","") == "1" then
 		entry({"remote" },call("act_remote")).leaf=true
 	end
@@ -76,6 +77,23 @@ function act_apstatus()
 			e.message = "正在连接到无线网络..."
 		else
 			e.message = "已连接到: ".. string.gsub(luci.sys.exec("uci get wireless.client.ssid"), "\n", "") .." IP: " .. ip
+		end
+	else
+		e.enabled = false
+	end
+	luci.http.prepare_content("application/json")
+	luci.http.write_json(e)
+end
+
+function act_vpnstatus()
+	local e={}
+	if string.gsub(luci.sys.exec("uci get netkeeper-interception.config.openvpn"), "\n", "") == "0" then
+		e.enabled = true
+		local ip = string.gsub(luci.sys.exec("ifconfig tun0 | grep 'inet addr' | awk '{ print $2}' | awk -F: '{print $2}'"),"\n","")
+		if ip == "" then
+			e.message = "正在连接到服务器..."
+		else
+			e.message = "已连接 本机IP: " .. ip
 		end
 	else
 		e.enabled = false

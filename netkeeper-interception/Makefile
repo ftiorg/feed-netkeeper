@@ -29,14 +29,14 @@ define Build/Prepare
 endef
 
 define Package/netkeeper-interception/install
+	$(CP) ./files/* $(1)/
 	$(INSTALL_DIR) $(1)/usr/lib/pppd/2.4.7
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/builds/*.so $(1)/usr/lib/pppd/2.4.7/
 	$(INSTALL_DIR) $(1)/etc/init.d
-	$(INSTALL_BIN) ./files/netkeeper-interception.init $(1)/etc/init.d/netkeeper-interception
-	$(INSTALL_DIR) $(1)/etc/netkeeper-interception
-	$(INSTALL_CONF) ./files/etc/netkeeper-interception/pppoe-server-options $(1)/etc/netkeeper-interception/pppoe-server-options
-	$(INSTALL_DIR) $(1)/etc/config
-	$(INSTALL_CONF) ./files/etc/config/netkeeper-interception $(1)/etc/config/netkeeper-interception
+	$(INSTALL_BIN) ./init/netkeeper-interception.init $(1)/etc/init.d/netkeeper-interception
+	$(INSTALL_DIR) $(1)/etc/init.d
+	$(INSTALL_BIN) ./init/openvpn.init $(1)/etc/init.d/openvpn
+
 endef
 
 $(eval $(call BuildPackage,$(PKG_NAME)))

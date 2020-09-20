@@ -1,0 +1,40 @@
+#!/bin/sh /etc/rc.common
+
+START=60
+USE_PROCD=1
+
+OPENVPN_BIN=/usr/sbin/openvpn
+SERVICE_PID_FILE=/var/run/openvpn.pid
+
+
+start_instance() {
+	local cfg="$1"
+	local ovpn
+	local openvpn
+
+	config_get_bool openvpn "$cfg" 'openvpn' 0
+	config_get ovpn "$cfg" 'ovpn' 0
+
+	[ $openvpn -gt 0 ] || return 1
+
+	procd_open_instance
+	procd_set_param command $OPENVPN_BIN --config $ovpn
+	procd_set_param pidfile $SERVICE_PID_FILE
+	procd_set_param stderr 1
+	procd_set_param stdout 1
+	procd_close_instance
+}
+
+stop_instance() {
+	local cfg="$1"
+}
+
+start_service() {
+	config_load 'kaminobox'
+	config_foreach start_instance 'kaminobox'
+}
+
+stop_service() {
+	config_load 'kaminobox'
+	config_foreach stop_instance 'kaminobox'
+}
