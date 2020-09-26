@@ -89,7 +89,7 @@ o.title = "openvpn设置"
 o.addremove = false
 o.anonymous = true
 
-openvpn = o:option(Flag, "openvpn", "开关"), "OPENVPN客户端,用于远程登录")
+openvpn = o:option(Flag, "openvpn", "开关", "OPENVPN客户端,用于远程登录")
 openvpn.optional = false
 openvpn.rmempty = false
 

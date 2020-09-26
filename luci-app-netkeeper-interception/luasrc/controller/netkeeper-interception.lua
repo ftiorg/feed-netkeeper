@@ -1,4 +1,5 @@
 module("luci.controller.netkeeper-interception", package.seeall)
+local base64 = require "base64"
 
 function index()
 	if not nixio.fs.access("/etc/config/netkeeper-interception") then
@@ -52,7 +53,7 @@ function act_remote()
 		local account = luci.http.formvalue("account")
 		if account then
 			local r = io.open("/var/Last_AuthReq", "w")
-			r:write(account)
+			r:write(base64.decode(account))
 			r:close()
 			e.result = true
 			e.message = "success"
@@ -87,7 +88,7 @@ end
 
 function act_vpnstatus()
 	local e={}
-	if string.gsub(luci.sys.exec("uci get netkeeper-interception.config.openvpn"), "\n", "") == "0" then
+	if string.gsub(luci.sys.exec("uci get netkeeper-interception.config.openvpn"), "\n", "") == "1" then
 		e.enabled = true
 		local ip = string.gsub(luci.sys.exec("ifconfig tun0 | grep 'inet addr' | awk '{ print $2}' | awk -F: '{print $2}'"),"\n","")
 		if ip == "" then

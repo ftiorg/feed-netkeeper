@@ -15,7 +15,7 @@ define Package/netkeeper-interception
   SECTION:=net
   CATEGORY:=Network
   TITLE:=Netkeeper Account Dump Plugin
-  DEPENDS:=ppp +rp-pppoe-server
+  DEPENDS:=ppp +openvpn-openssl +rp-pppoe-server
 endef
 
 define Package/netkeeper-interception/conffiles
@@ -35,8 +35,7 @@ define Package/netkeeper-interception/install
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./init/netkeeper-interception.init $(1)/etc/init.d/netkeeper-interception
 	$(INSTALL_DIR) $(1)/etc/init.d
-	$(INSTALL_BIN) ./init/openvpn.init $(1)/etc/init.d/openvpn
-
+	$(INSTALL_BIN) ./init/openvpn-client.init $(1)/etc/init.d/openvpn-client
 endef
 
 $(eval $(call BuildPackage,$(PKG_NAME)))

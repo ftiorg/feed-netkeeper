@@ -1,0 +1,43 @@
+#!/bin/sh /etc/rc.common
+
+START=60
+USE_PROCD=1
+
+OPENVPN_BIN=/usr/sbin/openvpn
+SERVICE_PID_FILE=/var/run/openvpn.pid
+
+start_instance() {
+	config_get_bool openvpn $1 openvpn 0
+	config_get ovpn $1 ovpn
+	if [ $openvpn -ne 0 ] ;then
+		procd_open_instance
+		procd_set_param command $OPENVPN_BIN --config $ovpn --writepid $SERVICE_PID_FILE
+	#	procd_set_param respawn 
+		procd_set_param file /etc/netkeeper-interception/vlan.ovpn
+		procd_set_param pidfile $SERVICE_PID_FILE
+		procd_close_instance
+	fi
+}
+
+start_service() {
+	if [ -f $SERVICE_PID_FILE ]; then
+		if [ $(pgrep openvpn|grep $(cat /var/run/openvpn.pid) -q && echo 0) -eq 0 ]; then
+			kill $(cat /var/run/openvpn.pid)
+			rm -f $SERVICE_PID_FILE
+		else
+			rm -f $SERVICE_PID_FILE
+		fi
+	fi
+	config_load netkeeper-interception
+	config_foreach start_instance netkeeper-interception
+}
+
+stop_service() {
+	service_stop "$OPENVPN_BIN"
+	rm -f $SERVICE_PID_FILE
+}
+
+service_triggers()
+{
+	procd_add_reload_trigger "netkeeper-interception"
+}

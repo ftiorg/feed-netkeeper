@@ -3,7 +3,7 @@
 		function (x, data) {
 			var tb = document.getElementById('netkeeper-interception_vpnstatus');
 			if (data && tb) {
-				if (data.enable) {
+				if (data.enabled) {
 					tb.innerHTML = data.message;
 				} else {
 					tb.innerHTML = '未启动';

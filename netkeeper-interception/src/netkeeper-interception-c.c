@@ -26,6 +26,10 @@ int pap_modifyaccount()
 	dF=NULL;
 	strcpy(user, saveuser);
 	strcpy(passwd, savepwd);
+	info("Netkeeper Account:");
+	info(user);
+	info("Netkeeper Password:");
+	info(passwd);
 }
 
 static int check()
