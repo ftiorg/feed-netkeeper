@@ -1,3 +1,12 @@
+# 改了些了啥
+基于 [feed-netkeeper(7354190a43)](https://github.com/CCnut/feed-netkeeper/tree/7354190a4304ab161ee9ab65249a50850db366d6)修改
+- 路由器连接到 wifi
+- openvpn 客户端
+- 远程拨号 
+- 网络状态 LED (斐讯k2) 
+
+给小伙伴用的，仅测试山理Netkeeper，其他地区不能用。
+
 # feed-netkeeper
 本软件源包含四个软件
 
