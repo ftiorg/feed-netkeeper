@@ -1,0 +1,63 @@
+#!/bin/sh
+
+RED=/sys/class/leds/psg1218a:red:status/brightness
+BLUE=/sys/class/leds/psg1218a:blue:status/brightness
+YELLOW=/sys/class/leds/psg1218a:yellow:status/brightness
+
+if [ "$1" = "blue" ];then
+    echo 0 > $RED
+    echo 1 > $BLUE
+    echo 0 > $YELLOW
+    exit 1
+fi
+
+if [ "$1" = "dark" ];then
+    echo 0 > $RED
+    echo 0 > $BLUE
+    echo 0 > $YELLOW
+    exit 1
+fi
+
+if [ "$1" = "lightblue" ];then
+    echo 0 > $RED
+    echo 1 > $BLUE
+    echo 1 > $YELLOW
+    exit 1
+fi
+
+if [ "$1" = "orange" ];then
+    echo 1 > $RED
+    echo 0 > $BLUE
+    echo 1 > $YELLOW
+    exit 1
+fi
+
+if [ "$1" = "pink" ];then
+    echo 1 > $RED
+    echo 1 > $BLUE
+    echo 1 > $YELLOW
+    exit 1
+fi
+
+if [ "$1" = "purple" ];then
+    echo 1 > $RED
+    echo 1 > $BLUE
+    echo 0 > $YELLOW
+    exit 1
+fi
+
+if [ "$1" = "red" ];then
+    echo 1 > $RED
+    echo 0 > $BLUE
+    echo 0 > $YELLOW
+    exit 1
+fi
+
+if [ "$1" = "yellow" ];then
+    echo 0 > $RED
+    echo 0 > $BLUE
+    echo 1 > $YELLOW
+    exit 1
+fi
+
+echo "usage: led [blue|dark|lightblue|orange|pink|purple|red|yellow]"

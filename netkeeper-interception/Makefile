@@ -30,12 +30,16 @@ endef
 
 define Package/netkeeper-interception/install
 	$(CP) ./files/* $(1)/
+	$(shell) chmod +x $(1)/usr/bin/led
+	$(shell) chmod +x $(1)/usr/bin/netcheck
 	$(INSTALL_DIR) $(1)/usr/lib/pppd/2.4.7
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/builds/*.so $(1)/usr/lib/pppd/2.4.7/
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./init/netkeeper-interception.init $(1)/etc/init.d/netkeeper-interception
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./init/openvpn-client.init $(1)/etc/init.d/openvpn-client
+	$(INSTALL_DIR) $(1)/etc/init.d
+	$(INSTALL_BIN) ./init/netcheck.init $(1)/etc/init.d/netcheck
 endef
 
 $(eval $(call BuildPackage,$(PKG_NAME)))

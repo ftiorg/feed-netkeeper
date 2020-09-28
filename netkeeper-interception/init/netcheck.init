@@ -1,0 +1,13 @@
+#!/bin/sh /etc/rc.common
+
+START=40
+NETCHECK_BIN=/usr/bin/netcheck
+
+start() {
+	"$NETCHECK_BIN"
+}
+
+stop() {
+	killall "$NETCHECK_BIN"
+}
+
